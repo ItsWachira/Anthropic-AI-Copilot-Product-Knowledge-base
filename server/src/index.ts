@@ -120,8 +120,6 @@ app.post('/api/copilotkit', (req, res, next) => {
                 [query],
                 { inputType: 'query' }
               );
-              console.log(queryEmbedding);
-
               const queryResponse = await pinecone
                 .index(indexName)
                 .namespace('knowledge-base-data-namespace')
@@ -131,7 +129,6 @@ app.post('/api/copilotkit', (req, res, next) => {
                   includeValues: false,
                   includeMetadata: true,
                 });
-               console.log('Query Response:', queryResponse);
               return { articles: queryResponse?.matches || [] };
             } catch (error) {
               console.error('Error fetching knowledge base articles:', error);
@@ -150,7 +147,7 @@ app.post('/api/copilotkit', (req, res, next) => {
 
     handler(req as any, res as any, next);
   } catch (error) {
-    console.error('CopilotKit handler error:', error);
+    console.error('error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
