@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Title,
@@ -11,18 +11,17 @@ import {
   Box,
   Modal,
   List,
-} from '@mantine/core';
-import { BookOpen } from 'lucide-react';
-import { Post } from '../types';
-import { fetchPosts } from '../api';
-import { CopilotSidebar } from '@copilotkit/react-ui';
-import { useCopilotAction } from '@copilotkit/react-core';
+} from "@mantine/core";
+import { BookOpen } from "lucide-react";
+import { Post } from "../types";
+import { fetchPosts } from "../api";
+import { CopilotSidebar } from "@copilotkit/react-ui";
+import { useCopilotAction } from "@copilotkit/react-core";
 
 export function KnowledgeBase() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -30,7 +29,7 @@ export function KnowledgeBase() {
         const data = await fetchPosts();
         setPosts(data);
       } catch (error) {
-        console.error('Error loading posts:', error);
+        console.error("Error loading posts:", error);
       } finally {
         setLoading(false);
       }
@@ -40,19 +39,18 @@ export function KnowledgeBase() {
   }, []);
 
   useCopilotAction({
-    name: 'FetchKnowledgebaseArticles',
-    description: 'Fetch relevant knowledge base articles based on a user query',
+    name: "FetchKnowledgebaseArticles",
+    description: "Fetch relevant knowledge base articles based on a user query",
     parameters: [
       {
-        name: 'query',
-        type: 'string',
-        description: 'User query for the knowledge base',
+        name: "query",
+        type: "string",
+        description: "User query for the knowledge base",
         required: true,
       },
     ],
-    handler: async ({ query }) => {
-    },
-    render: 'Getting relevant answers to your query...',
+    handler: async ({ query }) => {},
+    render: "Getting relevant answers to your query...",
   });
 
   const handlePostClick = (post: Post) => {
@@ -64,7 +62,7 @@ export function KnowledgeBase() {
   }
 
   return (
-    <Container size="md" py="xl" m="auto">
+    <Container size="md" py="xl" ml="xl">
       <Stack gap="xl">
         <Group justify="center" align="center">
           <BookOpen size={32} />
@@ -73,7 +71,7 @@ export function KnowledgeBase() {
 
         {/* Display posts */}
         <Grid>
-          {posts.map(post => (
+          {posts.map((post) => (
             <Grid.Col key={post.id} span={{ base: 12, sm: 6, md: 4 }}>
               <Card
                 shadow="sm"
@@ -81,7 +79,7 @@ export function KnowledgeBase() {
                 radius="md"
                 withBorder
                 onClick={() => handlePostClick(post)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               >
                 <Stack gap="md">
                   <Title order={3}>{post.title}</Title>
@@ -101,12 +99,13 @@ export function KnowledgeBase() {
         </Grid>
 
         {/* Copilot Sidebar */}
-        <Group justify="center" style={{ width: '100%' }}>
-          <Box style={{ flex: 1, maxWidth: '350px' }}>
+        <Group justify="center" style={{ width: "100%" }}>
+          <Box style={{ flex: 1, maxWidth: "350px" }}>
             <CopilotSidebar
               instructions="Help the user get the right knowledge base articles for their query"
               labels={{
-                initial: 'Welcome! Describe the query you need knowledge base articles for.',
+                initial:
+                  "Welcome! Describe the query you need knowledge base articles for.",
               }}
               defaultOpen={true}
               clickOutsideToClose={false}
@@ -115,23 +114,24 @@ export function KnowledgeBase() {
         </Group>
       </Stack>
 
-          {/* Modal for displaying selected post */}
+      {/* Modal for displaying selected post */}
       {selectedPost && (
         <Modal
           opened={!!selectedPost}
           onClose={() => setSelectedPost(null)}
           title={selectedPost.title}
           centered
+          size="xl"
         >
           <Stack gap="md">
             <List>
-              {selectedPost.content.split("\n").map((item, index) => (
-                <List.Item key={index}>{item}</List.Item>
-              ))}
+              {selectedPost.content
+                .split("\n")
+                .filter((item) => item.trim() !== "")
+                .map((item, index) => (
+                  <List.Item key={index}>{item}</List.Item>
+                ))}
             </List>
-            <Text size="xs" c="dimmed">
-              Posted on: {new Date(selectedPost.createdAt).toLocaleDateString()}
-            </Text>
           </Stack>
         </Modal>
       )}
