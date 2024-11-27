@@ -22,7 +22,6 @@ import { Pinecone } from '@pinecone-database/pinecone';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
 
-const model = 'multilingual-e5-large';
 
 if (!ANTHROPIC_API_KEY || !PINECONE_API_KEY) {
   console.error('Missing required API keys. ');
@@ -33,6 +32,7 @@ const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 const serviceAdapter = new AnthropicAdapter({ anthropic: anthropic as any });
 
 const pinecone = new Pinecone({ apiKey: PINECONE_API_KEY });
+const model = 'multilingual-e5-large';
 const indexName = 'knowledge-base-data';
 
 // Function to initialize the Pinecone index
