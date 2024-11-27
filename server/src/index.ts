@@ -35,7 +35,7 @@ const pinecone = new Pinecone({ apiKey: PINECONE_API_KEY });
 const model = 'multilingual-e5-large';
 const indexName = 'knowledge-base-data';
 
-// Function to initialize the Pinecone index
+// Function to create the Pinecone index for your knowledgebase articles
 const initializePinecone = async () => {
   const maxRetries = 3;
   const retryDelay = 2000;
