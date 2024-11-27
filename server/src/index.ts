@@ -2,21 +2,27 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { posts } from './data/posts.js';
-import {
-  CopilotRuntime,
-  AnthropicAdapter,
-  copilotRuntimeNodeHttpEndpoint,
-} from '@copilotkit/runtime';
-import Anthropic from '@anthropic-ai/sdk';
-import { Pinecone } from '@pinecone-database/pinecone';
 
 dotenv.config();
 
 const app = express();
 const port = 3000;
 
+import {
+  CopilotRuntime,
+  AnthropicAdapter,
+  copilotRuntimeNodeHttpEndpoint,
+} from '@copilotkit/runtime';
+import Anthropic from '@anthropic-ai/sdk';
+
+import { Pinecone } from '@pinecone-database/pinecone';
+
+
+
+
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
+
 const model = 'multilingual-e5-large';
 
 if (!ANTHROPIC_API_KEY || !PINECONE_API_KEY) {
@@ -26,6 +32,7 @@ if (!ANTHROPIC_API_KEY || !PINECONE_API_KEY) {
 
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 const serviceAdapter = new AnthropicAdapter({ anthropic: anthropic as any });
+
 const pinecone = new Pinecone({ apiKey: PINECONE_API_KEY });
 const indexName = 'knowledge-base-data';
 
