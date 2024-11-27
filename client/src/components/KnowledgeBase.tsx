@@ -15,6 +15,8 @@ import {
 import { BookOpen } from "lucide-react";
 import { Post } from "../types";
 import { fetchPosts } from "../api";
+
+
 import { CopilotSidebar } from "@copilotkit/react-ui";
 import { useCopilotAction } from "@copilotkit/react-core";
 
@@ -38,6 +40,8 @@ export function KnowledgeBase() {
     loadPosts();
   }, []);
 
+
+
   useCopilotAction({
     name: "FetchKnowledgebaseArticles",
     description: "Fetch relevant knowledge base articles based on a user query",
@@ -57,10 +61,10 @@ export function KnowledgeBase() {
     setSelectedPost(post);
   };
 
+
   if (loading) {
     return <Text>Loading...</Text>;
   }
-
   return (
     <Container size="md" py="xl" ml="xl">
       <Stack gap="xl">
@@ -98,23 +102,7 @@ export function KnowledgeBase() {
           ))}
         </Grid>
 
-        {/* Copilot Sidebar */}
-        <Group justify="center" style={{ width: "100%" }}>
-          <Box style={{ flex: 1, maxWidth: "350px" }}>
-            <CopilotSidebar
-              instructions="Help the user get the right knowledge base articles for their query"
-              labels={{
-                initial:
-                  "Welcome! Describe the query you need assistance with.",
-              }}
-              defaultOpen={true}
-              clickOutsideToClose={false}
-            />
-          </Box>
-        </Group>
-      </Stack>
-
-      {/* Modal for displaying selected post */}
+          {/* Modal for displaying selected post */}
       {selectedPost && (
         <Modal
           opened={!!selectedPost}
@@ -135,6 +123,24 @@ export function KnowledgeBase() {
           </Stack>
         </Modal>
       )}
+
+        {/* Copilot Sidebar */}
+        <Group justify="center" style={{ width: "100%" }}>
+          <Box style={{ flex: 1, maxWidth: "350px" }}>
+            <CopilotSidebar
+              instructions="Help the user get the right knowledge base articles for their query"
+              labels={{
+                initial:
+                  "Welcome! Describe the query you need assistance with.",
+              }}
+              defaultOpen={true}
+              clickOutsideToClose={false}
+            />
+          </Box>
+        </Group>
+      </Stack>
+
+    
     </Container>
   );
 }
