@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { posts } from './data/posts.js';
-
+import { posts } from './data/posts';
 dotenv.config();
 
 const app = express();
