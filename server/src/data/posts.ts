@@ -20,7 +20,7 @@ export const posts: Post[] = [
       Review CopilotKit’s documentation for additional setup and troubleshooting.
     `,
     category: "Basics",
-    createdAt: "2023-12-20",
+    createdAt: "2024-11-21",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export const posts: Post[] = [
       Copilot Tasks: Allow your Copilot to take proactive actions based on the application state.
     `,
     category: "Advanced",
-    createdAt: "2023-12-21",
+    createdAt: "2024-11-21",
   },
   {
     id: 3,
@@ -50,6 +50,6 @@ export const posts: Post[] = [
       Step 3: Test Components Independently: Isolate components and test their functionality separately and debug accordingly.
     `,
     category: "Support",
-    createdAt: "2023-12-22",
+    createdAt: "2024-11-21",
   },
 ];

@@ -105,7 +105,7 @@ export function KnowledgeBase() {
               instructions="Help the user get the right knowledge base articles for their query"
               labels={{
                 initial:
-                  "Welcome! Describe the query you need knowledge base articles for.",
+                  "Welcome! Describe the query you need assistance with.",
               }}
               defaultOpen={true}
               clickOutsideToClose={false}
