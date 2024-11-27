@@ -53,7 +53,6 @@ export function KnowledgeBase() {
         required: true,
       },
     ],
-    handler: async ({ query }) => {},
     render: "Getting relevant answers to your query...",
   });
 
